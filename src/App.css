@@ -74,7 +74,6 @@ button:hover:not(:disabled) {
 
 /* Keyboard styling */
 .keyboard {
-  cursor: pointer;
   margin: 20px auto;
   display: flex;
   flex-wrap: wrap;

@@ -1,11 +1,8 @@
-import {useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { word } from './word';
 import { languages } from './languages';
 import { getFarewellText } from './util';
-
-
-
 
 function App() {
 
@@ -14,11 +11,11 @@ function App() {
   const [dashedLines, setdashedLines] = useState('_ '.repeat(words.length))
   const [gussedLetters, setGussedLetters] = useState([])
   const [isgamewon, setIsGamewon] = useState(false)
-  const[gameOver, setgameOver]= useState(false)
- 
-  const [failedGuess, setFailedGuess]=useState([]);
-  const [farewellMessage, setFarewellMessage]= useState('')
-   
+  const [gameOver, setgameOver] = useState(false)
+
+  const [failedGuess, setFailedGuess] = useState([]);
+  const [farewellMessage, setFarewellMessage] = useState('')
+
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const isNewgame = () => {
     const newWord = getrandWord();
@@ -31,7 +28,7 @@ function App() {
     setFarewellMessage('');
 
   }
- 
+
   const handleGussedLetter = (letter) => {
     if (gussedLetters.includes(letter)) return;
     setGussedLetters((prevLetters) => [...prevLetters, letter]);
@@ -46,19 +43,19 @@ function App() {
         setIsGamewon(true);
       }
     } else {
-       setFailedGuess((prevFailed) => {
+      setFailedGuess((prevFailed) => {
         const remainingLanguages = languages.filter(language => !prevFailed.includes(language.name));
         if (remainingLanguages.length > 0) {
-          const struckLanguage =remainingLanguages[0].name;
+          const struckLanguage = remainingLanguages[0].name;
           setFarewellMessage(getFarewellText(struckLanguage))
           return [...prevFailed, struckLanguage]
         }
         setgameOver(true);
-        setdashedLines(words); 
+        setdashedLines(words);
         return prevFailed;
       });
     }
- 
+
   };
 
   const getButtonClass = (letter) => {
@@ -67,7 +64,34 @@ function App() {
     }
     return '';
   };
-    
+  const alphabetbtn = alphabet.map((letter) => (
+    <button
+      key={letter}
+      className={`key ${getButtonClass(letter)}`}
+      onClick={() => handleGussedLetter(letter)}
+      disabled={gussedLetters.includes(letter)}
+    >
+      {letter.toUpperCase()}
+    </button>
+  ))
+  const language = languages.map((language) => (
+    <button
+      key={language.name}
+      style={{
+        position: 'relative',
+        color: failedGuess.includes(language.name) ? '#888' : language.color,
+        backgroundColor: language.backgroundColor,
+
+        padding: '10px 20px',
+      }}
+      disabled={failedGuess.includes(language.name)}
+    >
+
+      {language.name}
+      {failedGuess.includes(language.name) && (<span className='skull'>💀</span>)}
+    </button>
+  ))
+
   return (
     <>
       <div className='app'>
@@ -78,53 +102,27 @@ function App() {
           </p>
         </header>
         <main>
-          
+
           {isgamewon && <div className='gamewon'>
             <h2>You Win!</h2>
             <h3>Well done!🎉</h3>
           </div>
           }
-            {farewellMessage && !gameOver && <div className="farewell-message">{farewellMessage}</div>}
-          { gameOver && <div className="farewell-message">
+          {farewellMessage && !gameOver && <div className="farewell-message">{farewellMessage}</div>}
+          {gameOver && <div className="farewell-message">
             <h2>Game over!</h2>
-          <p>you lose! Better start learning Assembly 😭</p></div>}
-          {languages.map((language) => (
-          <button 
-            key={language.name}
-            style={{
-              position:'relative',
-              color: failedGuess.includes(language.name) ? '#888' : language.color,
-              backgroundColor: language.backgroundColor,
-              
-              padding: '10px 20px',
-            }}
-            disabled = {failedGuess.includes(language.name)}
-          >
-  
-            {language.name}
-            {failedGuess.includes(language.name)&&(<span className='skull'>💀</span>)}
-          </button>
-        ))}
+            <p>you lose! Better start learning Assembly 😭</p></div>}
+          <section>
+            {language}
+          </section>
           <p>{dashedLines}</p>
           <div className='keyboard'>
-  {alphabet.map((letter) => (
-    <button
-      key={letter}
-      className={`key ${getButtonClass(letter)}`}
-      onClick={() => handleGussedLetter(letter)}
-      disabled={gussedLetters.includes(letter)}
-    >
-      {letter.toUpperCase()}
-    </button>
-  ))}
-</div>
+            <section>
+              {alphabetbtn}
+            </section>
+          </div>
 
-          {(isgamewon || gameOver) && <button  className="newGame"onClick={isNewgame}>New game</button>}
-
-
-
-
-
+          {(isgamewon || gameOver) && <button className="newGame" onClick={isNewgame}>New game</button>}
         </main>
       </div>
     </>
