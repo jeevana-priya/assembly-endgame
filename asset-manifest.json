@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/assembly_endgame/static/css/main.91a4a679.css",
-    "main.js": "/assembly_endgame/static/js/main.ac44ca9b.js",
-    "static/js/488.7909de62.chunk.js": "/assembly_endgame/static/js/488.7909de62.chunk.js",
-    "index.html": "/assembly_endgame/index.html",
-    "main.91a4a679.css.map": "/assembly_endgame/static/css/main.91a4a679.css.map",
-    "main.ac44ca9b.js.map": "/assembly_endgame/static/js/main.ac44ca9b.js.map",
-    "488.7909de62.chunk.js.map": "/assembly_endgame/static/js/488.7909de62.chunk.js.map"
+    "main.css": "/assembly-endgame/static/css/main.91a4a679.css",
+    "main.js": "/assembly-endgame/static/js/main.ba6a83df.js",
+    "static/js/488.7909de62.chunk.js": "/assembly-endgame/static/js/488.7909de62.chunk.js",
+    "index.html": "/assembly-endgame/index.html",
+    "main.91a4a679.css.map": "/assembly-endgame/static/css/main.91a4a679.css.map",
+    "main.ba6a83df.js.map": "/assembly-endgame/static/js/main.ba6a83df.js.map",
+    "488.7909de62.chunk.js.map": "/assembly-endgame/static/js/488.7909de62.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.91a4a679.css",
-    "static/js/main.ac44ca9b.js"
+    "static/js/main.ba6a83df.js"
   ]
 }
